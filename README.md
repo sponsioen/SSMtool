@@ -45,7 +45,7 @@ References
 
 Installation notes 
 -----------------------------------------------------------------------------
-Tested on MATLAB R2016b and R2018b.
+Tested on MATLAB R2016b, R2017b and R2018b.
 
 1) After you unzipped the files to mydir, 
    put the Current Directory in MATLAB to mydir. 
