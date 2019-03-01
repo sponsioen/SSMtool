@@ -380,16 +380,30 @@ try
        eval(strcat(char(spv(i)),sprintf('= spv(%d);',i)));
     end
 
-    f = eval(get(handles.input_nonlinear,'String'));   
-    M =  str2sym(M_string);
+    f = eval(get(handles.input_nonlinear,'String'));
+    [major, minor] = mcrversion;
+    
+    if major == 9 && minor == 1
+            M =  sym(M_string);
+    else
+            M =  str2sym(M_string);
+    end
     
     if handles.sys.conservative
         C = zeros(numel(q));
     else
-        C = str2sym(C_string);     
+        if major == 9 && minor == 1
+            C = sym(C_string);
+        else   
+            C = str2sym(C_string);   
+        end
     end
     
-    K =  str2sym(K_string);
+    if major == 9 && minor == 1
+        K =  sym(K_string);
+    else
+        K =  str2sym(K_string);
+    end
     fnl = [sym(zeros(numel(q),1));-M\f];
     
     try
