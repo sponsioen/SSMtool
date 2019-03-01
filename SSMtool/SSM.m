@@ -381,9 +381,10 @@ try
     end
 
     f = eval(get(handles.input_nonlinear,'String'));
-    [major, minor] = mcrversion;
     
-    if major == 9 && minor == 1
+    MV = ver('MATLAB');
+    
+    if sum(MV.Version == '9.1') == 3
             M =  sym(M_string);
     else
             M =  str2sym(M_string);
@@ -392,18 +393,19 @@ try
     if handles.sys.conservative
         C = zeros(numel(q));
     else
-        if major == 9 && minor == 1
+        if sum(MV.Version == '9.1') == 3
             C = sym(C_string);
         else   
             C = str2sym(C_string);   
         end
     end
     
-    if major == 9 && minor == 1
+    if sum(MV.Version == '9.1') == 3
         K =  sym(K_string);
     else
         K =  str2sym(K_string);
     end
+    
     fnl = [sym(zeros(numel(q),1));-M\f];
     
     try
